@@ -17,7 +17,7 @@ import { FaBuilding, FaCalendarAlt, FaCogs, FaMoneyBillWave, FaTachometerAlt, Fa
       className={({ isActive }) =>
         `${isActive ? "bg-blue-600 text-white" : "text-gray-700 hover:bg-gray-100"} 
         flex items-center gap-3 py-2.5 px-4 rounded-lg transition duration-300 ease-in-out`
-      }>
+      } end>
       <FaTachometerAlt className="text-lg" />
       <span>Dashboard</span>
     </NavLink>
@@ -30,8 +30,11 @@ import { FaBuilding, FaCalendarAlt, FaCogs, FaMoneyBillWave, FaTachometerAlt, Fa
     </NavLink>
 
     <NavLink
-      to="/admin-dashboard"
-      className="flex items-center gap-3 py-2.5 px-4 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-300 ease-in-out">
+      to="/admin-dashboard/departments"
+      className={({ isActive }) =>
+        `${isActive ? "bg-blue-600 text-white" : "text-gray-700 hover:bg-gray-100"} 
+        flex items-center gap-3 py-2.5 px-4 rounded-lg transition duration-300 ease-in-out`
+      }>
       <FaBuilding className="text-lg" />
       <span>Departments</span>
     </NavLink>

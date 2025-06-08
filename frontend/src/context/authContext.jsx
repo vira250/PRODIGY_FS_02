@@ -5,7 +5,7 @@ import { createContext , useState , useContext, useEffect } from 'react';
 const userContext = createContext()
 const authContext = ({children}) =>{
     const [user, setUser] =useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
     const verifyUser = async () =>{
         try {
@@ -16,13 +16,16 @@ const authContext = ({children}) =>{
                         'Authorization': `Bearer ${token}`
                     }
                 })
+                console.log(response)
                 if(response.data.success){
                     setUser(response.data.user)
                 }
             } else{
             setUser(null)
+            setLoading(false)
         }
         } catch(error){
+            console.log(error)
            if(error.response && !error.response.data.error){
             setUser(null)
            }

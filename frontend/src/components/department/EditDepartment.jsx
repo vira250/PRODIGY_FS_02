@@ -1,23 +1,50 @@
-import react from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-const AddDepartment =() =>{
-    const[department, setDepartment] = useState({
-        dep_name: '',
-        description:''
-    })
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const EditDepartment = () =>{
+    const {id} = useParams();
+    const [department, setDepartment] = useState([]);
+    const [depLoading, setDeploading] = useState(false)
     const Navigate = useNavigate()
-    const handleChange = (e) =>{
+useEffect(() =>{
+    const fetchDepartments = async () =>{
+        setDeploading(true)
+        try{
+            const response = await axios.get(`http://localhost:5000/api/department/${id}`,{
+                headers: {
+                    "Authorization" : `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            if(response.data.success && response.data.department){
+                setDepartment(response.data.department)
+            }
+        } catch (error) {
+            console.log("Axios error:", error); 
+            if (error.response && !error.response.data.success) {
+                alert(error.response.data.error);
+            } else {
+                alert("Server error. Please try again.");
+            }
+        } finally {
+            setDeploading(false)
+        }
+    }
+    fetchDepartments();
+}, [])
+
+const handleChange = (e) =>{
         const {name, value} = e.target;
         setDepartment({...department, [name] : value})
+
     }
 
-    const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await axios.post(
-      'http://localhost:5000/api/department/add',
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+          try {
+    const response = await axios.put(
+      `http://localhost:5000/api/department/${id}`,
       department,
       {
         headers: {
@@ -30,7 +57,7 @@ const AddDepartment =() =>{
     if (response.data.success) {
       Navigate("/admin-dashboard/departments");
     } else {
-      console.error("Failed to add department:", response.data.error);
+      console.error("Failed to edit department:", response.data.error);
       alert(response.data.error || "Unknown error");
     }
   } catch (error) {
@@ -41,14 +68,14 @@ const AddDepartment =() =>{
       alert("Server error. Please try again.");
     }
   }
-    };
 
-
+    }
     return(
-    <div className="pt-10 px-4">
+        <>{depLoading ? <div>Loading....</div>: 
+            <div className="pt-10 px-4">
       <div className="bg-white rounded-xl shadow-md max-w-xl mx-auto p-6">
 
-        <h3 className="text-2xl font-bold text-center text-gray-800 mb-6">Add Department</h3>
+        <h3 className="text-2xl font-bold text-center text-gray-800 mb-6">Edit Department</h3>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
 
@@ -60,6 +87,7 @@ const AddDepartment =() =>{
               type="text"
               name="dep_name"
               onChange={handleChange}
+              value={department.dep_name}
               placeholder="Enter Department Name"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -73,6 +101,7 @@ const AddDepartment =() =>{
             <textarea
               name="description"
               onChange={handleChange}
+              value={department.description}
               placeholder="Enter department description"
               rows="4"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
@@ -85,13 +114,14 @@ const AddDepartment =() =>{
               type="submit"
               className="px-6 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition"
             >
-              Add Department
+              Edit Department
             </button>
           </div>
         </form>
       </div>
     </div>
+}</>
     )
 }
 
-export default AddDepartment;
+export default EditDepartment;

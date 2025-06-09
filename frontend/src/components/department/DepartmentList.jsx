@@ -8,7 +8,10 @@ const DepartmentList =() =>{
 
     const [departments, setDepartments] = React.useState([]);
     const [deploading, setDeploading] = useState(false)
-
+    const  onDepartmentDelete = async (id) =>{
+        const data =  departments.filter(dep=> dep._id !== id)
+        setDepartments(data)
+    }
 useEffect(() =>{
     const fetchDepartments = async () =>{
         setDeploading(true)
@@ -18,14 +21,13 @@ useEffect(() =>{
                     "Authorization" : `Bearer ${localStorage.getItem('token')}`
                 }
             })
-            console.log("Fetched departments:", response.data);
             if(response.data.success && Array.isArray(response.data.data)){
                 let sno=1;
                 const data = response.data.data.map((dep) => ({
                        _id: dep._id,
                        sno: sno++,
                        name: dep.dep_name,
-                       action: (<DepartmentButtons/>)
+                       action: (<DepartmentButtons DepId={dep._id} onDepartmentDelete={onDepartmentDelete}/>)
                     }));
                 setDepartments(data)
             }

@@ -7,7 +7,8 @@ import axios from "axios"
     },
     {
         name: "Department Name",
-        selector: (row) => row.name
+        selector: (row) => row.name,
+        sortable: true
     },
     {
         name: "Action",

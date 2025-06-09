@@ -8,10 +8,16 @@ const DepartmentList =() =>{
 
     const [departments, setDepartments] = React.useState([]);
     const [deploading, setDeploading] = useState(false)
-    const  onDepartmentDelete = async (id) =>{
-        const data =  departments.filter(dep=> dep._id !== id)
-        setDepartments(data)
-    }
+    const [filteredDepartments, setFilteredDepartments] =useState([]);
+    
+  const onDepartmentDelete = (id) => {
+  const updatedDepartments = departments.filter(dep => dep._id !== id);
+  setDepartments(updatedDepartments);
+
+  // Also update filteredDepartments if exists
+  setFilteredDepartments(prevFiltered => prevFiltered.filter(dep => dep._id !== id));
+};
+
 useEffect(() =>{
     const fetchDepartments = async () =>{
         setDeploading(true)
@@ -30,6 +36,7 @@ useEffect(() =>{
                        action: (<DepartmentButtons DepId={dep._id} onDepartmentDelete={onDepartmentDelete}/>)
                     }));
                 setDepartments(data)
+                setFilteredDepartments(data)
             }
         } catch (error) {
             console.log("Axios error:", error); 
@@ -45,6 +52,18 @@ useEffect(() =>{
     fetchDepartments();
 }, [])
 
+
+const filterDepartments = (e) => {
+  const query = e.target.value.toLowerCase();
+
+  const records = departments.filter(dep =>
+    dep.name && dep.name.toLowerCase().includes(query)
+  );
+
+  setFilteredDepartments(records);
+};
+
+
 return(
     <>{deploading ? <div>Loading...</div> : 
 <div className="p-4 bg-white rounded-lg shadow-sm">
@@ -58,6 +77,7 @@ return(
         <input
           type="text"
           placeholder="Search by Department Name"
+          onChange={filterDepartments}
           className="px-3 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 w-full sm:w-1/2"
         />
 
@@ -71,7 +91,8 @@ return(
       <div>
         <DataTable
             columns={columns}
-            data={departments}
+            data={filteredDepartments}
+            pagination
         />
       </div>
     </div>

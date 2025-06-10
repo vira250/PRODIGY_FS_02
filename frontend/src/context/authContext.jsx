@@ -5,7 +5,7 @@ import { createContext , useState , useContext, useEffect } from 'react';
 const userContext = createContext()
 const authContext = ({children}) =>{
     const [user, setUser] =useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
     const verifyUser = async () =>{
         try {
@@ -19,6 +19,7 @@ const authContext = ({children}) =>{
                 console.log(response)
                 if(response.data.success){
                     setUser(response.data.user)
+                    console.log(setUser)
                 }
             } else{
             setUser(null)

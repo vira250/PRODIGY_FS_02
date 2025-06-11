@@ -1,6 +1,54 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
+import { columns, EmployeeButtons } from "../../utils/EmployeeHelper";
+import DataTable from "react-data-table-component";
+
 const List = () =>{
+
+  const [employees, setEmployees] = useState([]);
+  const [emploading, setEmploading] = useState(false)
+
+  useEffect(() =>{
+      const fetchEmployees = async () =>{
+          setEmploading(true)
+          try{
+              const response = await axios.get('http://localhost:5000/api/employee',{
+                  headers: {
+                      "Authorization" : `Bearer ${localStorage.getItem('token')}`
+                  }
+              })
+              console.log(response.data)
+              console.log("Full response:", response.data);
+              if(response.data.success && Array.isArray(response.data.employees)){
+                  let sno=1;
+                  const data = response.data.employees.map((emp) => ({
+                         _id: emp._id,
+                         sno: sno++,
+                         dep_name: emp.department.dep_name,
+                         name: emp.userId.name,
+                         dob : new Date(emp.dob).toLocaleDateString(),
+                         profileImage:<img width={60} className="rounded-full" src={`http://localhost:5000/${emp.userId.profileImage}`}/>,
+                         action: (<EmployeeButtons Id={emp._id}/>)
+                      }));
+                  setEmployees(data)
+              }
+          } catch (error) {
+              console.log("Axios error:", error); 
+              if (error.response && !error.response.data.success) {
+                  alert(error.response.data.error);
+              } else {
+                  alert("Server error. Please try again.");
+              }
+          } finally {
+              setEmploading(false)
+          }
+      }
+      fetchEmployees();
+  }, [])
+
     return(
         <div className="p-4 bg-white rounded-lg shadow-sm">
             <div className="text-center mb-4">
@@ -21,6 +69,11 @@ const List = () =>{
         >
           + Add Employee
         </Link>
+      </div>
+      <div>
+        <DataTable columns={columns} data={employees}>
+
+        </DataTable>
       </div>
         </div>
     )

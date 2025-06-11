@@ -63,7 +63,7 @@ const fetchDepartments = async () =>{
         return departments
 } 
 
- export const EmployeeButtons = ({DepId}) => {
+ export const EmployeeButtons = ({Id}) => {
   const navigate = useNavigate();
 
     return(
@@ -71,7 +71,7 @@ const fetchDepartments = async () =>{
   <button
     className="px-4 py-1.5 bg-blue-500 text-white rounded-md font-medium hover:bg-blue-700 transition"
     type="button"
-    onClick={() =>navigate(`/admin-dashboard/department/${DepId}`)}
+    onClick={() =>navigate(`/admin-dashboard/employees/${Id}`)}
   >
     View
   </button>

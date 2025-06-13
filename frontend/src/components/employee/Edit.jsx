@@ -57,38 +57,6 @@ const Edit = () =>{
         setEmployee({...employee, [name]: value})
     }
     
-//     const handleSubmit = async (e) =>{
-//       e.preventDefault();
-//       console.log("Form submitted");
-//       console.log("Updating employee ID:", id);
-//         try {
-//           const response = await axios.put(`http://localhost:5000/api/employee/${id}`,
-//           employee,
-//   {
-//     headers: {
-//       "Authorization": `Bearer ${localStorage.getItem('token')}`
-//     }
-//   }
-// );
-
-//     console.log(response.data)
-
-//     if (response.data.success) {
-//       navigate("/admin-dashboard/employees");
-//     } else {
-//       console.error("Failed to add employee:", response.data.error);
-//       alert(response.data.error || "Unknown error");
-//     }
-//         } catch (error){
-//           console.error("Axios error:", error);
-//           if (error.response && !error.response.data.success) {
-//             alert(error.response.data.error);
-//           } else {
-//               alert("Server error. Please try again.");
-//             }
-//         }
-
-//       }
 
 const handleSubmit = async (e) =>{
         e.preventDefault();

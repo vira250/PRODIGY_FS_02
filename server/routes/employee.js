@@ -1,6 +1,6 @@
 import express from 'express'
 import authMeiddleware from '../middleware/authMiddlware.js'
-import {addEmployee, upload, getEmployees, getEmployee, updateEmployee} from '../controllers/employeeController.js'
+import {addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetchEmployeesByDepId} from '../controllers/employeeController.js'
 
 const router = express.Router()
 
@@ -10,6 +10,6 @@ router.get('/:id', authMeiddleware, getEmployee)
 router.put('/:id', authMeiddleware, updateEmployee)
 
 
-// router.delete('/:id', authMeiddleware, deleteDepartment)
+router.get('/department/:id', authMeiddleware, fetchEmployeesByDepId)
 
 export default router

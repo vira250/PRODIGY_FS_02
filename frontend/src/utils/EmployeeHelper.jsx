@@ -63,6 +63,31 @@ const fetchDepartments = async () =>{
         return departments
 } 
 
+// employee for salary form
+
+export const getEmployees = async (id) =>{
+    let employees 
+    try{
+        const response = await axios.get(`http://localhost:5000/api/employees/department/${id}`,{
+                headers: {
+                    "Authorization" : `Bearer ${localStorage.getItem('token')}`
+                }
+        })
+        console.log(response)
+            if(response.data.success){
+                employees = response.data.employees
+            }
+    } catch (error) {
+            console.log("Axios error:", error); 
+            if (error.response && !error.response.data.success) {
+                alert(error.response.data.error);
+            } else {
+                alert("Server error. Please try again.");
+            }
+        } 
+        return employees
+} 
+
  export const EmployeeButtons = ({Id}) => {
   const navigate = useNavigate();
 

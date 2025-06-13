@@ -78,7 +78,8 @@ const fetchDepartments = async () =>{
   <button
     className="px-4 py-1.5 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition"
     type="button"
-  >
+    onClick={() => navigate(`/admin-dashboard/employees/edit/${Id}`)}>
+  
     Edit
   </button>
     <button

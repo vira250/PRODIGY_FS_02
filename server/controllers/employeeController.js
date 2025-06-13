@@ -3,7 +3,6 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import multer from "multer";
 import path from 'path';
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) =>{
         cb(null, 'public/uploads')
@@ -91,4 +90,36 @@ const getEmployee = async (req, res) =>{
         }
 }
 
-export { addEmployee, upload, getEmployees, getEmployee };
+const updateEmployee = async (req, res) =>{
+  const {id} = req.params;
+  console.log(id)
+      try{
+             const {
+                name,
+                maritalStatus,
+                designation,
+                salary,
+                department,
+              } = req.body;
+
+              const employee = await Employee.findById({_id:id})
+              if(!employee){
+                return res.status(404).json({success: false, error: "Employee not found" });
+              }
+
+               const user = await User.findById({_id:employee.userId})
+               if(!user){
+                return res.status(404).json({success: false, error: "User not found"})
+               }
+               const updateUser = await User.findByIdAndUpdate({_id: employee.userId}, {name})
+               const updateEmployee = await Employee.findByIdAndUpdate({_id:id}, {maritalStatus, designation, salary, department})
+               if(!updateUser || !updateEmployee){
+                return res.status(404).json({success: false, error: "Failed to update employe"})
+               }
+               return res.status(200).json({success: true, message: "Employee updated successfully"})
+          }catch (error) {
+              return res.status(500).json({ success: false, error: "Failed to get Employees" });
+          }
+}
+
+export { addEmployee, upload, getEmployees, getEmployee, updateEmployee };;

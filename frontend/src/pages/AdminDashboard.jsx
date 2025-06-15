@@ -5,9 +5,7 @@ import Navbar from '../components/dashboard/Navbar';
 import AdminSummary from '../components/AdminSummary';
 import { Outlet } from 'react-router-dom';
 const AdminDashboard = () =>{
-    const {user} = useAuth()    
-    console.log("AdminDashboard Rendered");
-    
+    const {user} = useAuth()   
     return (
         <div className='flex'>
             <AdminSidebar>

@@ -22,7 +22,7 @@ const verifyUser = async (req, res, next) => {
     next(); 
   } catch (error) {
     console.error("Auth error:", error.message); 
-    return res.status(401).json({ success: false, error: 'Invalid or expired token.' });
+    return res.status(401).json({ success: false, error: 'Invalid or expired token.' , error});
   }
 };
 

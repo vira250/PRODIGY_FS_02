@@ -18,6 +18,8 @@ import Summary from './components/EmployeeDashboard/Summary';
 import LeaveList from './components/leave/List'
 import AddLeave from './components/leave/Add'
 import Setting from './components/EmployeeDashboard/Setting';
+import Table from './components/leave/Table';
+import Detail from './components/leave/Detail';
 function App() {
 
   return (
@@ -46,6 +48,8 @@ function App() {
     <Route path="/admin-dashboard/salary/add" element={<AddSalary />} />
     <Route path="/admin-dashboard/add-employee" element={<Add/>}></Route>
     <Route path="/admin-dashboard/employees" element={<List/>}></Route>
+    <Route path = "/admin-dashboard/leaves" element = {<Table/>}></Route>
+    <Route path = "/admin-dashboard/leaves/:id" element = {<Detail/>}></Route>
   </Route>
 
         <Route path='/employee-dashboard' 

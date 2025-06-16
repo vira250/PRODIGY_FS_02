@@ -1,5 +1,6 @@
 import Leave from '../models/Leave.js'
 import Employee from '../models/Employee.js'
+import path from 'path';
 const addLeave = async (req, res) =>{
      try{
         const {userId, leaveType , startDate, endDate, reason} = req.body;
@@ -29,4 +30,63 @@ const getLeaves  = async (req, res) =>{
         return res.status(500).json({message: "Error Occured", error: error.message})
     }
 }
-export { addLeave , getLeaves};
+
+const getLeave  = async (req, res) =>{
+    try{
+        const leaves = await Leave.find().populate({
+            path: 'employeeId',
+            populate: [
+                { 
+                    path : "department",
+                    select: 'dep_name'
+                },
+                {
+                    path : "userId",
+                    select: 'name'
+                }
+            ]
+        })
+        return res.status(200).json({success: true, leaves});
+    } catch(error){
+        console.log(error.message)
+        return res.status(500).json({message: "Error Occured", error: error.message})
+    }
+}
+
+ const getLeaveDetail = async (req, res) =>{
+    try{
+        const {id} = req.params;
+        const leave = await Leave.findById({_id:id}).populate({
+            path: 'employeeId',
+            populate: [
+                { 
+                    path : "department",
+                    select: 'dep_name'
+                },
+                {
+                    path : "userId",
+                    select: 'name , profileImage'
+                }
+            ]
+        })
+        return res.status(200).json({success: true, leave});
+    } catch(error){
+        console.log(error.message)
+        return res.status(500).json({message: "Error Occured", error: error.message})
+    }
+ }
+
+ const updateLeave = async (req, res) =>{
+    try{
+        const {id} = req.params;
+        const leave = await Leave.findByIdAndUpdate({_id: id}, {status: req.body.status});
+        if(!leave){
+            return res.status(404).json({ success: false, message: "Leave not found" });
+        }
+        return res.status(200).json({success: true, leave});
+    } catch(error){
+        console.log(error.message)
+        return res.status(500).json({message: "Error Occured", error: error.message})
+    }
+ }
+export { addLeave , getLeaves, getLeave, getLeaveDetail, updateLeave};

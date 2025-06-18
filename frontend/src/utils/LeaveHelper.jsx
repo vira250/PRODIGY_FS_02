@@ -63,7 +63,6 @@ export const LeaveButtons = ({Id}) => {
     const handleView = (id) =>{
         navigate(`/admin-dashboard/leaves/${id}`)
     }
-
     return(
   <button
     className="px-4 py-1.5 bg-blue-500 text-white rounded-md font-medium hover:bg-blue-700 transition"

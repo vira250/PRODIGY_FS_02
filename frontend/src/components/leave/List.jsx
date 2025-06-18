@@ -11,7 +11,7 @@ const {id} = useParams()
 const {user} = useAuth()
   const fetchLeaves = async () =>{
         try{
-            const response = await axios.get(`http://localhost:5000/api/leave/${id}`, {
+            const response = await axios.get(`http://localhost:5000/api/leave/${id}/${user.role}`, {
                 headers:{
                     Authorization : `Bearer ${localStorage.getItem('token')}`,
                 },

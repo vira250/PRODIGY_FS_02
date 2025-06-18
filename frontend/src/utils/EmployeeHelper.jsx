@@ -1,7 +1,6 @@
 
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-
  export const columns =[
     {
         name: "S No",

@@ -4,7 +4,7 @@ import { addSalary, getSalary } from '../controllers/salaryController.js'
 const router = express.Router()
 
 router.post('/add', authMeiddleware, addSalary)
-router.get('/:id', authMeiddleware, getSalary)
+router.get('/:id/:role', authMeiddleware, getSalary)
 
 
 export default router

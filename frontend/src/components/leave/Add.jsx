@@ -18,29 +18,57 @@ const Add  = () =>{
         setFormValues({ ...formValues, [e.target.name]: e.target.value });
     }
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault();
-        try{
-            const response = await axios.post("http://localhost:5000/api/leave/add",
-                leave,
-                {
+    // const handleSubmit = async (e) =>{
+    //     e.preventDefault();
+    //     try{
+    //         const response = await axios.post("http://localhost:5000/api/leave/add",
+    //             leave,
+    //             {
+    //             headers: {
+    //                 "Authorization" : `Bearer ${localStorage.getItem('token')}`
+    //             }
+    //         })
+    //         console.log(response.data)
+    //         if (response.data.success ) {
+    //         navigate("/employee-dashboard/leaves");
+    //     }
+    //     } catch (error) {
+    //         console.log("Axios error:", error); 
+    //         if (error.response && !error.response.data.success) {
+    //             alert(error.response.data.error);
+    //         } else {
+    //             alert("Server error. Please try again.");
+    //         }
+    //     }
+    // }
+
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await axios.post("http://localhost:5000/api/leave/add",
+            leave,
+            {
                 headers: {
-                    "Authorization" : `Bearer ${localStorage.getItem('token')}`
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`
                 }
-            })
-            console.log(response.data)
-            if(response.data.success){
-                navigate("/employee-dashboard/leaves")
             }
-        } catch (error) {
-            console.log("Axios error:", error); 
-            if (error.response && !error.response.data.success) {
-                alert(error.response.data.error);
-            } else {
-                alert("Server error. Please try again.");
-            }
+        )
+        console.log("Add leave :", response.data);
+        
+        if (response.data.success && user && user._id) {
+            navigate(`/employee-dashboard/leaves/${user._id}`);
+        }
+    } catch (error) {
+        console.log("Axios error:", error);
+        if (error.response && !error.response.data.success) {
+            alert(error.response.data.error);
+        } else {
+            alert("Server error. Please try again.");
         }
     }
+};
+
 
 
     return(

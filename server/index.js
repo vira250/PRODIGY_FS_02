@@ -7,6 +7,7 @@ import connectToDatabase from './db/db.js';
 import salaryRouter from './routes/salary.js';
 import settingRouter from './routes/setting.js'
 import leaveRouter from './routes/leave.js';
+import dashboardRouter from './routes/dashboard.js';
 connectToDatabase()
 
 const app = express()
@@ -20,7 +21,7 @@ app.use('/api/employees', employeeRouter);
 app.use('/api/salary', salaryRouter);
 app.use('/api/leave', leaveRouter);
 app.use('/api/setting', settingRouter);
-
+app.use('/api/dashboard', dashboardRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

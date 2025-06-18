@@ -34,7 +34,7 @@ import {useAuth} from '../../context/authContext';
     </NavLink>
 
     <NavLink
-      to="/employee-dashboard/leaves"
+      to={`/employee-dashboard/leaves/${user._id}`}
       className={({ isActive }) =>
         `${isActive ? "bg-blue-600 text-white" : "text-gray-700 hover:bg-gray-100"} 
         flex items-center gap-3 py-2.5 px-4 rounded-lg transition duration-300 ease-in-out`

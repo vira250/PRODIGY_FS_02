@@ -37,9 +37,15 @@ const [error, setError] = useState(null);
                         }
                     }
                 )
+                if(user.role === "admin"){
                 if(response.data.success){
-                    navigate("/employee-dashboard")
+                    navigate("/admin-dashboard")
                     setError("")
+                }}
+                else if(user.role === "employee"){
+                  if(response.data.success){
+                    navigate("/employee-dashboard")
+                  }
                 }
             } catch (error) {
             if(error.response && !error.response.data.success){

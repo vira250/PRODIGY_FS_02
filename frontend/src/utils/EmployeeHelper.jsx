@@ -118,7 +118,7 @@ export const getEmployees = async (id) =>{
     <button
     className="px-4 py-1.5 bg-green-600 text-white rounded-md font-medium hover:bg-red-700 transition"
     type="button"
-  >
+    onClick={() => navigate(`/admin-dashboard/employees/leaves/${Id}`)}>
     Leave
   </button>
 </div>

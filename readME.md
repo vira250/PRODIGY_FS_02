@@ -1,20 +1,20 @@
-# 🔐 Secure User Authentication System - PRODIGY_FS_02
+# 🧑‍💼 Employee Management System - PRODIGY_FS_02
 
-This project is a full-stack **Secure User Authentication System** built with **MERN Stack** (MongoDB, Express.js, React, Node.js) and styled using **Tailwind CSS**. It provides secure login, registration, role-based access, and JWT-based session handling.
+This is a full-stack **Employee Management System** built using the **MERN stack** (MongoDB, Express.js, React, Node.js) and styled with **Tailwind CSS**. It features secure authentication, role-based access control, and a responsive user interface to manage employees effectively.
 
 ---
 
 ## 📌 Features
 
-- 🧾 User registration and login
-- 🔑 JWT-based authentication
-- 🧂 Passwords hashed using bcrypt
-- 🔐 Role-based access control (e.g., User/Admin)
-- 🛡️ Protected routes with middleware
-- 🎨 Responsive React frontend using Tailwind CSS
-- ⚙️ RESTful APIs with Express.js
+- 🧾 Employee login
+- 🔐 JWT-based authentication
+- 🧂 Password hashing with bcrypt
+- 🔑 Role-based access control (e.g., Admin/User)
+- 🛡️ Protected routes using middleware
+- 📊 Employee management interface (Add, View, Delete)
+- 🎨 Responsive UI with React + Tailwind CSS
 
----
+
 
 ## 🖥️ Tech Stack
 
@@ -29,7 +29,7 @@ This project is a full-stack **Secure User Authentication System** built with **
 ### Frontend:
 - React.js
 - Tailwind CSS
-- Axios (for API calls)
+- Axios
 - React Router DOM
 
 
@@ -78,12 +78,13 @@ npm run dev
 
 ## 📬 API Endpoints (Backend)
 
-| Method | Endpoint         | Description       | Access        |
-| ------ | ---------------- | ----------------- | ------------- |
-| POST   | `/api/register`  | Register new user | Public        |
-| POST   | `/api/login`     | User login        | Public        |
-| GET    | `/api/protected` | Protected route   | Authenticated |
-| GET    | `/api/admin`     | Admin-only route  | Admin Only    |
+| Method | Endpoint             | Description             | Access        |
+| ------ | -------------------- | ----------------------- | ------------- |
+| POST   | `/api/register`      | Register a new employee | Public        |
+| POST   | `/api/login`         | Employee login          | Public        |
+| GET    | `/api/employees`     | List all employees      | Admin Only    |
+| DELETE | `/api/employees/:id` | Delete an employee      | Admin Only    |
+| GET    | `/api/protected`     | Access protected data   | Authenticated |
 
 ## UI Screenshots
 

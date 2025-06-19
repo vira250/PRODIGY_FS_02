@@ -116,7 +116,6 @@ Secure storage of environment variables
 
 📧 Email Verification
 
-📊 Admin Dashboard
 
 🌐 Deploy on Vercel + Render
 

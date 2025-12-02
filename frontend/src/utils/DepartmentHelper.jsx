@@ -31,7 +31,7 @@ import axios from "axios"
       });
 
       if (response.data.success) {
-        onDepartmentDelete(DepId); // callback to parent to remove from list
+        onDepartmentDelete(DepId);
         alert("Department deleted successfully");
       } else {
         alert("Failed to delete department.");

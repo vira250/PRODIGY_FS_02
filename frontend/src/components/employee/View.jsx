@@ -10,7 +10,7 @@ const View = () =>{
 
     const fetchEmployee = async () =>{
         try{
-            const response = await axios.get(`http://localhost:5000/api/employees/${id}`,{
+            const response = await axios.get(`https://employee-api-nine.vercel.app/api/employees/${id}`,{
                 headers: {
                     "Authorization" : `Bearer ${localStorage.getItem('token')}`
                 }
@@ -40,7 +40,7 @@ const View = () =>{
         {/* Profile Image */}
         <div className="flex-shrink-0">
           <img
-            src={`http://localhost:5000/${employee.userId.profileImage}`}
+            src={`https://employee-api-nine.vercel.app/${employee.userId.profileImage}`}
             className="w-48 h-48 rounded-full object-cover border-4 border-blue-500 shadow-md"
             alt="Profile"
           />

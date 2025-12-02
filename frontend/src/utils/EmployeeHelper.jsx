@@ -43,7 +43,7 @@ import { useNavigate } from "react-router-dom"
 const fetchDepartments = async () =>{
     let departments 
     try{
-        const response = await axios.get('http://localhost:5000/api/department',{
+        const response = await axios.get('https://employee-api-nine.vercel.app/api/department',{
                 headers: {
                     "Authorization" : `Bearer ${localStorage.getItem('token')}`
                 }
@@ -67,7 +67,7 @@ const fetchDepartments = async () =>{
 export const getEmployees = async (id) =>{
     let employees 
     try{
-        const response = await axios.get(`http://localhost:5000/api/employees/department/${id}`,{
+        const response = await axios.get(`https://employee-api-nine.vercel.app/api/employees/department/${id}`,{
                 headers: {
                     "Authorization" : `Bearer ${localStorage.getItem('token')}`
                 }

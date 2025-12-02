@@ -38,7 +38,7 @@ const Add = () =>{
 const handleSubmit = async (e) =>{
         e.preventDefault();
           try {
-    const response = await axios.post(`http://localhost:5000/api/salary/add`,
+    const response = await axios.post(`https://employee-api-nine.vercel.app/api/salary/add`,
       salary,
       {
         headers: {

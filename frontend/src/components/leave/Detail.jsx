@@ -10,7 +10,7 @@ const Detail = () =>{
 
     const fetchLeave = async () =>{
         try{
-            const response = await axios.get(`http://localhost:5000/api/leave/detail/${id}`,{
+            const response = await axios.get(`https://employee-api-nine.vercel.app/api/leave/detail/${id}`,{
                 headers: {
                     "Authorization" : `Bearer ${localStorage.getItem('token')}`
                 }
@@ -33,7 +33,7 @@ const Detail = () =>{
 
     const changeStatus = async (id, newstatus) =>{
         try{
-            const response = await axios.put(`http://localhost:5000/api/leave/${id}`, {status: newstatus},{
+            const response = await axios.put(`https://employee-api-nine.vercel.app/api/leave/${id}`, {status: newstatus},{
                 headers: {
                     "Authorization" : `Bearer ${localStorage.getItem('token')}`
                 }
@@ -61,7 +61,7 @@ const Detail = () =>{
         {/* Profile Image */}
         <div className="flex-shrink-0">
           <img
-            src={`http://localhost:5000/${leave.employeeId.userId.profileImage}`}
+            src={`https://employee-api-nine.vercel.app/${leave.employeeId.userId.profileImage}`}
             className="w-48 h-48 rounded-full object-cover border-4 border-blue-500 shadow-md"
             alt="Profile"
           />

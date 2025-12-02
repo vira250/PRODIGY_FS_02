@@ -29,7 +29,7 @@ const [error, setError] = useState(null);
             setError("Passwords do not match");
         } else {
             try{
-                const response = await axios.put("http://localhost:5000/api/setting/change-password",setting,
+                const response = await axios.put("https://employee-api-nine.vercel.app/api/setting/change-password",setting,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`,

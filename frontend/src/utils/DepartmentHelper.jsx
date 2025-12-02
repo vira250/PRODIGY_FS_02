@@ -24,7 +24,7 @@ import axios from "axios"
     if (!confirm) return;
 
     try {
-      const response = await axios.delete(`http://localhost:5000/api/department/${DepId}`, {
+      const response = await axios.delete(`https://employee-api-nine.vercel.app/api/department/${DepId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

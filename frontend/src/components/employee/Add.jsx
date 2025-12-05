@@ -213,18 +213,6 @@ const Add = () =>{
           </select>
         </div>
 
-        {/* Image Upload */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleChange}
-            className="w-full text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200"
-          />
-        </div>
-      
 
       <div className="md:col-span-2 mt-6 flex justify-center">
         <button

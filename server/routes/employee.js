@@ -7,7 +7,7 @@ router.get('/', authMeiddleware, getEmployees);
 
 router.get('/department/:id', authMeiddleware, fetchEmployeesByDepId);
 
-router.post('/add', authMeiddleware, upload.single('image'), addEmployee);
+router.post('/add', authMeiddleware, addEmployee);
 
 router.get('/:id', authMeiddleware, getEmployee);
 

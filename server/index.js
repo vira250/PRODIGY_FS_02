@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors'
+import dotenv from 'dotenv';
+dotenv.config();
 import authRouter from './routes/auth.js';
 import departmentRouter from './routes/department.js';
 import employeeRouter from './routes/employee.js';
@@ -11,7 +13,8 @@ import dashboardRouter from './routes/dashboard.js';
 import User from "./models/User.js";
 import bcrypt from "bcrypt";
 connectToDatabase()
-
+  .then(() => console.log("DB Connected"))
+  .catch(err => console.log("DB Error:", err));
 const app = express()
 
 app.use(cors({

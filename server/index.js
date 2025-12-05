@@ -16,6 +16,26 @@ app.use(cors({
   origin: 'https://prodigy-fs-02-jade.vercel.app',
   credentials: true
 }));
+
+app.get("/create-admin", async (req, res) => {
+  try {
+    const exists = await User.findOne({ email: "admin@gmail.com" });
+    if (exists) return res.send("Admin already exists");
+
+    const hash = await bcrypt.hash("admin", 10);
+    await User.create({
+      name: "Admin",
+      email: "admin@gmail.com",
+      password: hash,
+      role: "admin",
+    });
+
+    res.send("Admin created");
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
 app.use(express.json());
 app.use(express.static('public/uploads'))
 app.use('/api/auth', authRouter);

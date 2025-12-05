@@ -8,6 +8,8 @@ import salaryRouter from './routes/salary.js';
 import settingRouter from './routes/setting.js'
 import leaveRouter from './routes/leave.js';
 import dashboardRouter from './routes/dashboard.js';
+import User from "./models/User.js";
+import bcrypt from "bcrypt";
 connectToDatabase()
 
 const app = express()

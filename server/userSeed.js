@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 const userRegister = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/ems");
+    await mongoose.connect("mongodb+srv://employee:employee123@employeecluster.rqglouh.mongodb.net/employeeDB?appName=employeeCluster");
 
     const exists = await User.findOne({ email: "admin@gmail.com" });
     if (exists) {
